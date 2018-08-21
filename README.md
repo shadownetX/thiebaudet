@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/shadownetX/thiebaudet.svg?branch=master)](https://travis-ci.org/shadownetX/thiebaudet)
+
 ## THIEBAUDET
 
 **Requirements:**
