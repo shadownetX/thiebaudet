@@ -1,0 +1,143 @@
+#!/bin/bash
+
+build ()
+{
+    $DOCKER_COMPOSE build
+}
+
+run ()
+{
+    $DOCKER_COMPOSE up -d
+}
+
+stop ()
+{
+    $DOCKER_COMPOSE stop
+}
+
+destroy ()
+{
+    $DOCKER_COMPOSE down -v --rmi local
+}
+
+install ()
+{
+    $DOCKER_COMPOSE build
+    $DOCKER_COMPOSE up -d
+    $DOCKER_COMPOSE exec -T --user www-data php composer install
+    $DOCKER_COMPOSE run --rm --no-deps node sh -ci 'npm install'
+}
+
+expelliarmus ()
+{
+    docker system prune -a -f
+}
+
+avadakedavra ()
+{
+    read -p "Continue (y/N)?" choice
+    case "$choice" in
+      y|Y )
+      # Stop all containers
+      echo "Stop all containers";
+      docker stop $(docker ps -a -q);
+      # Remove all containers
+      echo "Remove all containers";
+      docker rm $(docker ps -a -q);
+      # Remove all images
+      echo "Remove all images";
+      docker rmi $(docker images -a -q);;
+      n|N ) echo "See you next time Muggle!";;
+      * ) echo "Bye!";;
+    esac
+}
+
+ps ()
+{
+    $DOCKER_COMPOSE ps
+}
+
+bash ()
+{
+    $DOCKER_COMPOSE exec --user www-data php sh
+}
+
+exec-php ()
+{
+    ARGS=$@
+    $DOCKER_COMPOSE exec --user www-data -T php $ARGS
+}
+
+exec-php-root ()
+{
+    ARGS=$@
+    $DOCKER_COMPOSE exec -T php $ARGS
+}
+
+composer ()
+{
+    declare ARGS=$@
+    $DOCKER_COMPOSE exec -T --user www-data php composer $ARGS
+}
+
+console ()
+{
+    declare ARGS=$@
+    $DOCKER_COMPOSE exec -T --user www-data php bin/console $ARGS
+}
+
+exec-node ()
+{
+    declare ARGS=$@
+    $DOCKER_COMPOSE exec node $ARGS
+}
+
+usage ()
+{
+    echo "usage: bin/docker COMMAND [ARGS]
+    build               Build project
+    run                 Run project
+    stop                Stop project
+    destroy             Destroy project
+    install             Initialize project
+    expelliarmus        Prune network/volumes/containers/images
+    avadakedavra        Delete network/volumes/containers/images
+    ps                  List container
+    bash                Run sh inside php container
+    exec-php            Execute command inside container php
+    exec-php-root       Execute command inside container php as root
+    exec-node           Execute command inside container node
+    composer            Execute composer inside container php
+    console             Execute bin/console
+    "
+}
+
+main ()
+{
+    CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+    DOCKER_COMPOSE_FILE="$CURRENT_DIR/../docker-compose.yml"
+
+    ENV_FILE=.env
+
+    if [[ ! -e ${ENV_FILE} ]]; then
+        cp .env.dist .env
+    fi
+
+    declare DOCKER_COMPOSE="docker-compose -f $DOCKER_COMPOSE_FILE"
+
+    if [ -z $1 ]; then
+        usage
+        exit 0
+    fi
+
+    COMMAND=$1
+
+    if [[ ! "$COMMAND" =~ ^build|run|expelliarmus|install|stop|destroy|avadakedavra|exec-node|console|ps|bash|exec-php|exec-php-root|composer$ ]]; then
+        echo "$COMMAND is not a supported command"
+        exit 1
+    fi
+
+    $@
+}
+
+main $@
