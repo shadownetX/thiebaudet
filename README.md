@@ -15,7 +15,7 @@
 
 **About this stack:**
 
-* **[nginx:1.13-alpine]** :  Use ```http://localhost/``` to access the website or use ```http://thiebaudet.vonp``` with this configuration : ```sudo sh -c "echo '127.0.0.1   terraqueus.dev' >> /etc/hosts"```
+* **[nginx:1.13-alpine]** :  Use ```http://localhost/``` to access the website or use ```http://thiebaudet.vonp``` with this configuration : ```sudo sh -c "echo '127.0.0.1   thiebaudet.vonp' >> /etc/hosts"```
 * **[php:7.2-fpm-alpine]** 
 * **[redis:4-alpine]** Check "About: Redis" section.
 * **[node:9-alpine]** Check "About: Symfony 4 - Encore" section.
