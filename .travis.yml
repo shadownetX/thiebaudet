@@ -5,12 +5,15 @@ php:
 services:
   - docker
 
+before_install:
+- npm i -g npm
+
 install:
   - composer install
   - npm install
 
-before_install:
-  - npm i -g npm
-
 script:
   - npm run-script build
+
+after_script:
+  - bin/docker exec-php php ./vendor/bin/php-cs-fixer fix src
