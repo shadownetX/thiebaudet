@@ -16,4 +16,4 @@ script:
   - npm run-script build
 
 after_script:
-  - bin/docker exec-php php ./vendor/bin/php-cs-fixer fix src
+  - php ./vendor/bin/php-cs-fixer fix src
