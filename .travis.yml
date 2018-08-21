@@ -5,7 +5,9 @@ php:
 services:
   - docker
 
-script:
+install:
   - composer install
   - npm install
+
+script:
   - npm run-script build
