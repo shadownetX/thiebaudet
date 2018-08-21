@@ -9,5 +9,8 @@ install:
   - composer install
   - npm install
 
+before_install:
+  - npm i -g npm
+
 script:
   - npm run-script build
