@@ -4,7 +4,6 @@ backend default {
     .port = "80";
 }
 sub vcl_recv {
-    // Remove all cookies except the session ID.
     if (req.http.Cookie) {
         set req.http.Cookie = ";" + req.http.Cookie;
         set req.http.Cookie = regsuball(req.http.Cookie, "; +", ";");
@@ -19,11 +18,9 @@ sub vcl_recv {
     }
 }
 sub vcl_recv {
-    // Add a Surrogate-Capability header to announce ESI support.
     set req.http.Surrogate-Capability = "abc=ESI/1.0";
 }
 sub vcl_backend_response {
-    // Check for ESI acknowledgement and remove Surrogate-Control header
     if (beresp.http.Surrogate-Control ~ "ESI/1.0") {
         unset beresp.http.Surrogate-Control;
         set beresp.do_esi = true;
