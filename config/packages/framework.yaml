@@ -9,7 +9,7 @@ framework:
     session:
         handler_id: ~
 
-    #esi: true
+    esi: true
     #fragments: true
     php_errors:
         log: true

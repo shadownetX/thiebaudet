@@ -41,3 +41,15 @@ services:
     image: redis:4-alpine
     ports:
       - ${REDIS_PORT_EXPOSE}:${REDIS_PORT}
+
+  varnish:
+    container_name: ${APP_NAME}-varnish
+    build: docker/varnish
+    ports:
+      - ${VARNISH_PORT_EXPOSE}:${VARNISH_PORT}
+    depends_on:
+      - nginx
+    links:
+      - nginx
+    volumes:
+      - ./docker/varnish/default.vcl:/etc/varnish/default.vcl
