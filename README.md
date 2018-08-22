@@ -19,6 +19,7 @@
 * **[php:7.2-fpm-alpine]** 
 * **[redis:4-alpine]** Check "About: Redis" section.
 * **[node:9-alpine]** Check "About: Symfony 4 - Encore" section.
+* **[varnish:4-alpine]** 
 
 ### Manipulate containers
 
