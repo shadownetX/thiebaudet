@@ -24,10 +24,7 @@ class TestController
     public function testAction()
     {
         $response = new Response("<html><body>Hello World!</body></html>");
-
-        //Varnish was remove
-        //$response->setSharedMaxAge(600);
-
+        
         return $response;
     }
 
