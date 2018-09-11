@@ -25,7 +25,8 @@ class TestController
     {
         $response = new Response("<html><body>Hello World!</body></html>");
 
-        $response->setSharedMaxAge(600);
+        //Varnish was remove
+        //$response->setSharedMaxAge(600);
 
         return $response;
     }

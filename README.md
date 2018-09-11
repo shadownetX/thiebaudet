@@ -4,22 +4,17 @@
 
 **Requirements:**
 
-* Docker: https://www.docker.com/get-docker
-* Docker-compose: https://docs.docker.com/compose/gettingstarted/
+* [Docker](https://www.docker.com/get-docker)
+* [Docker-compose](https://docs.docker.com/compose/gettingstarted/)
 
-> You could use ```ctop``` for monitoring docker containers.
->
->```sudo wget https://github.com/bcicen/ctop/releases/download/v0.7/ctop-0.7-linux-amd64 -O /usr/local/bin/ctop```
->
->```sudo chmod +x /usr/local/bin/ctop```
+> You could use ```ctop``` for monitoring docker containers. Please visit https://github.com/bcicen/ctop
 
 **About this stack:**
 
-* **[nginx:1.13-alpine]** :  Use ```http://localhost/``` to access the website or use ```http://thiebaudet.vonp``` with this configuration : ```sudo sh -c "echo '127.0.0.1   thiebaudet.vonp' >> /etc/hosts"```
+* **[nginx:1.15-alpine]** :  Use ```https://localhost/``` to access the website or use ```https://www.thiebaudet.vonp``` with this configuration : ```sudo sh -c "echo '127.0.0.1   www.thiebaudet.vonp' >> /etc/hosts"```
 * **[php:7.2-fpm-alpine]** 
 * **[redis:4-alpine]** Check "About: Redis" section.
-* **[node:9-alpine]** Check "About: Symfony 4 - Encore" section.
-* **[varnish:4-alpine]** 
+* **[node:10-alpine]** Check "About: Symfony 4 - Encore" section.
 
 ### Manipulate containers
 
