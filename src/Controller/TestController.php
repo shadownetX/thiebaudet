@@ -24,7 +24,7 @@ class TestController
     public function testAction()
     {
         $response = new Response("<html><body>Hello World!</body></html>");
-        
+
         return $response;
     }
 
