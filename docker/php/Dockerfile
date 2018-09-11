@@ -28,10 +28,14 @@ RUN docker-php-ext-enable \
         apcu \
         xdebug
 
-RUN apk del build-deps
+RUN apk del build-deps && \
+    rm -rf /var/cache/apk/*
 
 # Add access
 RUN usermod -u 1000 www-data
+
+# Add custom php.ini
+COPY php.ini /usr/local/etc/php/php.ini
 
 # Init composer
 COPY --from=composer /usr/bin/composer /usr/bin/composer
@@ -39,5 +43,4 @@ RUN mkdir /var/composer
 ENV COMPOSER_HOME /var/composer
 RUN chown -R www-data /var/composer
 
-# Remove cache
-RUN rm -rf /var/cache/apk/*
+WORKDIR /var/www/thiebaudet
