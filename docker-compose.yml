@@ -13,6 +13,7 @@ services:
       - ${SYMFONY_APP_PATH}:${SYMFONY_DOCKER_PATH}
     env_file:
       - ${ENV_FILE_DIR}
+    restart: always
 
   #######################################################
   ###                                               NGINX
@@ -28,6 +29,7 @@ services:
       - ${SYMFONY_APP_PATH}:${SYMFONY_DOCKER_PATH}
     env_file:
       - ${ENV_FILE_DIR}
+    restart: always
 
   #######################################################
   ###                                                NODE
@@ -56,6 +58,7 @@ services:
       - nginx
     env_file:
       - ${ENV_FILE_DIR}
+    restart: always
 
   #######################################################
   ###                                               REDIS
@@ -67,3 +70,4 @@ services:
       - ${REDIS_PORT_EXPOSE}:${REDIS_PORT}
     env_file:
       - ${ENV_FILE_DIR}
+    restart: always
