@@ -2,17 +2,21 @@ version: "3"
 
 services:
 
+  #######################################################
+  ###                                                 PHP
+  #######################################################
   php:
     container_name: ${APP_NAME}-php
     build: docker/php
     user: www-data
-    working_dir: ${SYMFONY_DOCKER_PATH}
     volumes:
       - ${SYMFONY_APP_PATH}:${SYMFONY_DOCKER_PATH}
-      - ./docker/php/php.ini:/usr/local/etc/php/php.ini
     env_file:
       - ${ENV_FILE_DIR}
 
+  #######################################################
+  ###                                               NGINX
+  #######################################################
   nginx:
     container_name: ${APP_NAME}-nginx
     build: docker/nginx
@@ -25,23 +29,22 @@ services:
     env_file:
       - ${ENV_FILE_DIR}
 
+  #######################################################
+  ###                                                NODE
+  #######################################################
   node:
     container_name: ${APP_NAME}-node
     build: docker/node
     user: node
-    working_dir: ${SYMFONY_DOCKER_PATH}
     volumes:
       - ${SYMFONY_APP_PATH}:${SYMFONY_DOCKER_PATH}
     env_file:
       - ${ENV_FILE_DIR}
     command: sh -c "npm install && npm start"
 
-  redis:
-    container_name: ${APP_NAME}-redis
-    image: redis:4-alpine
-    ports:
-      - ${REDIS_PORT_EXPOSE}:${REDIS_PORT}
-
+  #######################################################
+  ###                                             VARNISH
+  #######################################################
   varnish:
     container_name: ${APP_NAME}-varnish
     build: docker/varnish
@@ -51,5 +54,16 @@ services:
       - nginx
     links:
       - nginx
-    volumes:
-      - ./docker/varnish/default.vcl:/etc/varnish/default.vcl
+    env_file:
+      - ${ENV_FILE_DIR}
+
+  #######################################################
+  ###                                               REDIS
+  #######################################################
+  redis:
+    container_name: ${APP_NAME}-redis
+    image: redis:4-alpine
+    ports:
+      - ${REDIS_PORT_EXPOSE}:${REDIS_PORT}
+    env_file:
+      - ${ENV_FILE_DIR}
