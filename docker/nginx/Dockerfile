@@ -10,6 +10,10 @@ RUN rm -f /etc/nginx/nginx.conf \
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY symfony.conf /etc/nginx/conf.d/symfony.conf
 
+# Nginx SSL
+COPY ssl/thiebaudet.crt /etc/nginx/ssl/thiebaudet.crt
+COPY ssl/thiebaudet.key /etc/nginx/ssl/thiebaudet.key
+
 # Connect nginx with php-fpm
 RUN echo "upstream php-upstream { server php:9000; }" > /etc/nginx/conf.d/upstream.conf
 

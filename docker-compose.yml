@@ -23,6 +23,7 @@ services:
     build: docker/nginx
     ports:
       - ${NGINX_PORT_EXPOSE}:${NGINX_PORT}
+      - ${NGINX_SSL_PORT_EXPOSE}:${NGINX_SSL_PORT}
     links:
       - php
     volumes:
@@ -43,22 +44,6 @@ services:
     env_file:
       - ${ENV_FILE_DIR}
     command: sh -c "npm install && npm start"
-
-  #######################################################
-  ###                                             VARNISH
-  #######################################################
-  varnish:
-    container_name: ${APP_NAME}-varnish
-    build: docker/varnish
-    ports:
-      - ${VARNISH_PORT_EXPOSE}:${VARNISH_PORT}
-    depends_on:
-      - nginx
-    links:
-      - nginx
-    env_file:
-      - ${ENV_FILE_DIR}
-    restart: always
 
   #######################################################
   ###                                               REDIS
