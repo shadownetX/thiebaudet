@@ -22,10 +22,33 @@ destroy ()
 
 install ()
 {
+
     $DOCKER_COMPOSE build
     $DOCKER_COMPOSE up -d
+
+    echo ""
+    echo "- Install dependencies"
+    echo ""
+
     $DOCKER_COMPOSE exec -T --user www-data php composer install
     $DOCKER_COMPOSE run --rm --no-deps node sh -ci 'npm install'
+
+    echo ""
+    echo " [OK] Install dependencies"
+    echo ""
+
+    echo ""
+    echo "- Fix permissions"
+    echo ""
+
+    $DOCKER_COMPOSE exec -T php chmod 777 -R /var/www/thiebaudet/var/log
+    $DOCKER_COMPOSE exec -T php chmod 777 -R /var/www/thiebaudet/var/cache
+
+    echo ""
+    echo " [OK] Fix permissions"
+    echo ""
+
+    $DOCKER_COMPOSE ps
 }
 
 expelliarmus ()
