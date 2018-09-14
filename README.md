@@ -15,6 +15,7 @@
 * **[php:7.2-fpm-alpine]** 
 * **[redis:4-alpine]** Check "About: Redis" section.
 * **[node:10-alpine]** Check "About: Symfony 4 - Encore" section.
+* **[postgres:10-alpine]**
 
 ### Manipulate containers
 
@@ -38,6 +39,7 @@
 | BASH          | ```bin/docker bash```                 | Access /bin/bash or sh (alpine)                        |
 | COMPOSER      | ```bin/docker composer [ARGS]```      | Execute composer                                       |
 | SYMFONY       | ```bin/docker console [ARGS]```       | Execute Symfony's console (bin/console)                |
+| POSTGRES      | ```bin/docker psql-access```          | Access to postgresql cli                               |
 
 ### Informations about containers
 

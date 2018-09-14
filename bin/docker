@@ -115,6 +115,11 @@ exec-node ()
     $DOCKER_COMPOSE exec node $ARGS
 }
 
+psql-access ()
+{
+    $DOCKER_COMPOSE exec postgres psql db-tbdt user
+}
+
 usage ()
 {
     echo "usage: bin/docker COMMAND [ARGS]
@@ -132,6 +137,7 @@ usage ()
     exec-node           Execute command inside container node
     composer            Execute composer inside container php
     console             Execute bin/console
+    psql-access         Access to postgresql cli
     "
 }
 
@@ -155,7 +161,7 @@ main ()
 
     COMMAND=$1
 
-    if [[ ! "$COMMAND" =~ ^build|run|expelliarmus|install|stop|destroy|avadakedavra|exec-node|console|ps|bash|exec-php|exec-php-root|composer$ ]]; then
+    if [[ ! "$COMMAND" =~ ^build|run|expelliarmus|install|stop|destroy|avadakedavra|exec-node|console|psql-access|ps|bash|exec-php|exec-php-root|composer$ ]]; then
         echo "$COMMAND is not a supported command"
         exit 1
     fi
