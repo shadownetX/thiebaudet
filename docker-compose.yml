@@ -8,8 +8,10 @@ services:
   postgres:
     container_name: ${APP_NAME}-postgres
     image: postgres:10-alpine
+    volumes:
+         - '/var/lib/postgresql/data'
     ports:
-      - ${POSTGRES_PORT}:5432
+      - 5432:5432
     env_file:
       - ${ENV_FILE_DIR}
 
