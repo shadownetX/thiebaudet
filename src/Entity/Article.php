@@ -104,8 +104,8 @@ class Article
     private $updatedAt;
 
     /**
-     * @ORM\PrePersist()
      * @ORM\PreUpdate()
+     * @ORM\PrePersist()
      */
     public function updatedTimestamps()
     {
