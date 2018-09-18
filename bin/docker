@@ -23,8 +23,16 @@ destroy ()
 install ()
 {
 
+    echo ""
+    echo "- Run project"
+    echo ""
+
     $DOCKER_COMPOSE build
     $DOCKER_COMPOSE up -d
+
+    echo ""
+    echo "[OK] Run project"
+    echo ""
 
     echo ""
     echo "- Install dependencies"
@@ -46,6 +54,26 @@ install ()
 
     echo ""
     echo " [OK] Fix permissions"
+    echo ""
+
+    echo ""
+    echo "- Generate DB architecture"
+    echo ""
+
+    $DOCKER_COMPOSE exec -T --user www-data php bin/console doctrine:schema:update --force
+
+    echo ""
+    echo "[OK] Generate DB architecture"
+    echo ""
+
+    echo ""
+    echo "- Load fixtures"
+    echo ""
+
+    $DOCKER_COMPOSE exec -T --user www-data php bin/console doctrine:fixtures:load
+
+    echo ""
+    echo "[OK] Load fixtures"
     echo ""
 
     $DOCKER_COMPOSE ps
