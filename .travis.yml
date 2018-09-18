@@ -16,10 +16,7 @@ before_script:
   - npm run-script build
 
 script:
-  - bin/docker build
-  - bin/docker run
-  - bin/docker console doctrine:schema:update --force
-  - bin/docker console doctrine:fixtures load
+  - bin/docker install
 
 after_script:
   - php ./vendor/bin/php-cs-fixer fix src
