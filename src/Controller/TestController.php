@@ -12,6 +12,7 @@
 namespace App\Controller;
 
 
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -21,9 +22,14 @@ class TestController
     /**
      * @Route("/")
      */
-    public function testAction()
+    public function testAction(EntityManagerInterface $em)
     {
         $response = new Response("<html><body>Hello World!</body></html>");
+
+        $em->getConnection()->connect();
+        $connected = $em->getConnection()->isConnected();
+
+        dump($connected);
 
         return $response;
     }

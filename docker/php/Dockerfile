@@ -6,7 +6,8 @@ RUN apk add --no-cache --virtual persistent-deps \
         zlib \
         pcre-dev \
         shadow \
-        tzdata
+        tzdata \
+        postgresql-dev
 
 RUN apk add --no-cache --virtual \
         build-deps \
@@ -17,7 +18,8 @@ RUN apk add --no-cache --virtual \
 RUN docker-php-ext-install \
         opcache \
         intl \
-        zip
+        zip \
+        pdo_pgsql
 
 RUN pecl install \
         apcu \
@@ -27,6 +29,7 @@ RUN docker-php-ext-enable \
         opcache \
         apcu \
         xdebug
+
 
 RUN apk del build-deps && \
     rm -rf /var/cache/apk/*
