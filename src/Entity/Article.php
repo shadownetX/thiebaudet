@@ -18,6 +18,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Article du blog.
  *
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
+ *
+ * @ORM\HasLifecycleCallbacks()
  */
 class Article
 {
@@ -46,7 +48,7 @@ class Article
      *
      * @var string
      *
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=255)
      *
      * @Assert\NotBlank()
      */
@@ -84,13 +86,11 @@ class Article
     private $online = false;
 
     /**
-     * Date de création de l'article.
+     * Date de crÃ©ation de l'article.
      *
-     * @var \DateTime
+     * @var \DateTime|null
      *
      * @ORM\Column(type="datetime")
-     *
-     * @Assert\DateTime()
      */
     private $createdAt;
 
@@ -100,11 +100,13 @@ class Article
      * @var \DateTime
      *
      * @ORM\Column(type="datetime")
-     *
-     * @Assert\DateTime()
      */
     private $updatedAt;
 
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
     public function updatedTimestamps()
     {
         $this->setUpdatedAt(new \DateTime('now'));
@@ -222,7 +224,7 @@ class Article
     /**
      * @return \DateTime
      */
-    public function getCreatedAt(): \DateTime
+    public function getCreatedAt(): ?\DateTime
     {
         return $this->createdAt;
     }
