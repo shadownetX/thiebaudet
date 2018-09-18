@@ -4,6 +4,7 @@ php:
 
 services:
   - docker
+  - postgresql
 
 before_install:
   - npm i -g npm
@@ -21,3 +22,9 @@ script:
 
 after_script:
   - php ./vendor/bin/php-cs-fixer fix src
+
+env:
+  global:
+    - POSTGRES_DB=mydb
+    - POSTGRES_USER=user
+    - POSTGRES_PASSWORD=password
