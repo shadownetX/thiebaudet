@@ -8,12 +8,8 @@ parameters:
 doctrine:
     dbal:
         # configure these for your database server
-        driver: 'pdo_pgsql'
-        host: 'localhost'
-        port: '5432'
-        dbname: 'mydb'
-        user: 'user'
-        password: 'password'
+        driver: 'pdo_mysql'
+        url: '%env(resolve:DATABASE_URL)%'
         charset: UTF8
     orm:
         auto_generate_proxy_classes: '%kernel.debug%'
