@@ -48,6 +48,16 @@ install ()
     echo " [OK] Fix permissions"
     echo ""
 
+    echo ""
+    echo "- Generate DB architecture"
+    echo ""
+
+    $DOCKER-COMPOSE exec -T --user www-data php bin/console doctrine:schema:update --force
+
+    echo ""
+    echo "[OK] Generate DB architecture"
+    echo ""
+
     $DOCKER_COMPOSE ps
 }
 

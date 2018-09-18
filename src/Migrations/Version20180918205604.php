@@ -6,7 +6,7 @@ use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
 /**
- * Auto-generated Migration: Please modify to your needs!
+ * First creation of entities : Article & Tag with their own needs.
  */
 final class Version20180918205604 extends AbstractMigration
 {
