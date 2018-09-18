@@ -25,7 +25,7 @@
 | RUN           | ```bin/docker run```                | Run the app                           |
 | STOP          | ```bin/docker stop```               | Stop the app                          |
 | DESTROY       | ```bin/docker destroy```            | Destroy the app                       |
-| INSTALL       | ```bin/docker install```            | Initialize the app                    |
+| INSTALL       | ```bin/docker install```            | Install the app & demo db content     |
 | EXPELLIARMUS  | ```bin/docker expelliarmus```       | Prune docker env                      |
 | AVADAKEDAVRA  | ```bin/docker avadakedavra```       | Stop then destroy containers + images |
 
