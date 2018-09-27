@@ -9,8 +9,8 @@ before_install:
   - npm i -g npm
 
 install:
-  - composer install --no-dev -o
-  - npm install --only=prod
+  - composer install
+  - npm install
 
 script:
   - npm run-script build
