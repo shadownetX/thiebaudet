@@ -1,16 +1,16 @@
 language: php
 php:
   - "7.2"
-
-services:
-  - docker
+  - "7.1"
+  - "7.0"
+  - hhvm
 
 before_install:
   - npm i -g npm
 
 install:
-  - composer install
-  - npm install
+  - composer install --no-dev -o
+  - npm install --only=prod
 
 script:
   - npm run-script build
